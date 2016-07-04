@@ -2,6 +2,8 @@ daemon off;
 #Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 
+env NGINX_STATIC_ALIAS_PATH;
+
 events {
 	use epoll;
 	accept_mutex on;
