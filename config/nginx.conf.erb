@@ -37,7 +37,8 @@ http {
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
                 location /static/ {
-                	alias <%= ENV['NGINX_STATIC_ALIAS_PATH']%>;
+                        set_by_lua $static_alias 'return os.getenv("NGINX_STATIC_ALIAS_PATH")';
+                	alias $static_alias;
     		}
 
 		location / {
